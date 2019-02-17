@@ -66,12 +66,21 @@ try:
 	PLAYLISTS = {}	# key-value map of playlist name to list of tracks
 
 	for p in playlist_dict_contents:
-		PLAYLISTS[p] = playlist_items(p)
+		PLAYLISTS[playlist_name(p)] = playlist_items(p)
 	print 'successful.'
 
 except:
   sys.exit("something went wrong. You might want to check the value of XML_LINE_WHERE_PLAYLISTS_START")
 
-
-
+# Print the songs in each playlist to text file
+print 'Writing to file...',
+try:
+	with open('iTunes_Library.txt', 'w') as f:
+		for playlist in PLAYLISTS:
+			f.write('{}\n'.format(playlist.encode('utf-8', 'ignore')))
+			for song_id in PLAYLISTS[playlist]:
+				f.write('\t{}\n'.format(SONGS[song_id].encode('utf-8', 'ignore')))
+	print 'successful.'
+except:
+	sys.exit("Something went wrong while writing to text file.")
 
