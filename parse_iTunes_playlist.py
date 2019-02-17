@@ -19,7 +19,7 @@ def song_name(d):
 
 def playlist_items(d):
 	# return list of songs in a playlist
-	return [x[1].text for x in d[15]]
+	return [x[1].text for x in d[len(d) - 1]]
 
 def playlist_name(d):
 	# return name of playlist
@@ -59,15 +59,15 @@ except:
 	sys.exit("something went wrong. You might want to check the value of XML_LINE_WHERE_TRACKS_START")
 
 # Parse playlists
-print "Attempting to parse playlists..."
+print "Attempting to parse playlists...",
 XML_LINE_WHERE_PLAYLISTS_START = XML_LINE_WHERE_TRACKS_START + 2
 # try:
 playlist_dict_contents = dict_contents[XML_LINE_WHERE_PLAYLISTS_START]
 PLAYLISTS = {}	# key-value map of playlist name to list of tracks
 
-for n in range(len(playlist_dict_contents)):
-	print playlist_name(playlist_dict_contents[n])
-	# PLAYLISTS[playlist_name(playlist_dict_contents[2*n])] = playlist_items(playlist_dict_contents[2*n])
+for p in playlist_dict_contents:
+	PLAYLISTS[p] = playlist_items(p)
+print 'successful.'
 
 # except:
 # sys.exit("something went wrong. You might want to check the value of XML_LINE_WHERE_PLAYLISTS_START")
