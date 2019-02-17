@@ -61,16 +61,16 @@ except:
 # Parse playlists
 print "Attempting to parse playlists...",
 XML_LINE_WHERE_PLAYLISTS_START = XML_LINE_WHERE_TRACKS_START + 2
-# try:
-playlist_dict_contents = dict_contents[XML_LINE_WHERE_PLAYLISTS_START]
-PLAYLISTS = {}	# key-value map of playlist name to list of tracks
+try:
+	playlist_dict_contents = dict_contents[XML_LINE_WHERE_PLAYLISTS_START]
+	PLAYLISTS = {}	# key-value map of playlist name to list of tracks
 
-for p in playlist_dict_contents:
-	PLAYLISTS[p] = playlist_items(p)
-print 'successful.'
+	for p in playlist_dict_contents:
+		PLAYLISTS[p] = playlist_items(p)
+	print 'successful.'
 
-# except:
-# sys.exit("something went wrong. You might want to check the value of XML_LINE_WHERE_PLAYLISTS_START")
+except:
+  sys.exit("something went wrong. You might want to check the value of XML_LINE_WHERE_PLAYLISTS_START")
 
 
 
